@@ -38,6 +38,10 @@ const styles = {
   links: {
     listStyle: "none",
     display: "flex",
-    gap: "20px"
-  }
+    gap: "20px",
+    color: "#fff"
+    }
+
+  
+
 };
