@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
+
+
 
 function ProductoDetalle() {
   const [producto, setProducto] = useState(null);
+  const [cantidad, setCantidad] = useState(1);
+  const { agregarAlCarrito } = useContext(CartContext);
+
   const { id } = useParams();
+  
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
@@ -11,9 +19,32 @@ function ProductoDetalle() {
       .then(data => setProducto(data));
   }, [id]);
 
+//Funciones del contador
+const aumentar = () => {
+  if (cantidad < producto.stock) {
+    setCantidad(cantidad + 1);
+  }
+};
+
+const disminuir = () => {
+  if (cantidad > 1) {
+    setCantidad(cantidad - 1);
+  }
+};
+
+
+
+
   if (!producto) {
     return <p style={{ padding: "40px" }}>Cargando producto...</p>;
   }
+
+
+
+
+
+
+
 
   return (
     <div style={styles.container}>
@@ -43,14 +74,27 @@ function ProductoDetalle() {
 
         {/* Controles */}
         <div style={styles.actions}>
-          <button style={styles.btnSecondary}>-</button>
-          <span style={styles.qty}>1</span>
-          <button style={styles.btnSecondary}>+</button>
+  <button style={styles.btnSecondary} onClick={disminuir}>
+    -
+  </button>
 
-          <button style={styles.btnPrimary}>
-            Agregar al carrito
-          </button>
-        </div>
+  <span style={styles.qty}>{cantidad}</span>
+
+  <button style={styles.btnSecondary} onClick={aumentar}>
+    +
+  </button>
+
+  <button
+  style={styles.btnPrimary}
+  onClick={() => agregarAlCarrito(cantidad)}
+>
+  Agregar al carrito
+</button>
+
+
+</div>
+
+
       </div>
     </div>
   );
@@ -122,6 +166,7 @@ const styles = {
     border: "1px solid #ccc",
     backgroundColor: "#fff",
     cursor: "pointer"
+    
   },
   qty: {
     fontSize: "16px",

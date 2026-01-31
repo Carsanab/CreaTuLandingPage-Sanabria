@@ -1,25 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./Components/NavBar";
-import ItemListContainer from "./Components/ItemListContainer";
 import Productos from "./Components/Productos";
 import ProductoDetalle from "./Components/ProductoDetalle";
+import Contacto from "./Components/Contacto";
+import Inicio from "./Components/Inicio";
+
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <NavBar />
 
       <Routes>
-        <Route
-          path="/"
-          element={<ItemListContainer Saludo="¡Bienvenido a HomeDecoHub!" />}
-        />
+        <Route path="/" element={<Inicio />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
+        <Route path="/contacto" element={<Contacto />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
 export default App;
-

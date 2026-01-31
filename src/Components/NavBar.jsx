@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 function NavBar() {
   return (
     <nav style={styles.nav}>
-      <img src={logo} alt="HomeDecoHub" style={styles.logoImg} />
+      <Link to="/">
+        <img src={logo} alt="HomeDecoHub" style={styles.logoImg} />
+      </Link>
 
       <ul style={styles.links}>
         <li><Link to="/">Inicio</Link></li>
         <li><Link to="/productos">Productos</Link></li>
-        <li><Link to="#">Contacto</Link></li>
+        <li><Link to="/contacto">Contacto</Link></li>
       </ul>
 
       <CartWidget />
@@ -19,7 +21,6 @@ function NavBar() {
 }
 
 export default NavBar;
-
 
 const styles = {
   nav: {

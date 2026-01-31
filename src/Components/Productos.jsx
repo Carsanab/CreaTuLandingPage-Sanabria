@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {getProducts} from "../Firebase/db"
 
 function Productos() {
   const [productos, setProductos] = useState([]);
@@ -8,6 +9,9 @@ function Productos() {
     fetch("https://dummyjson.com/products/category/furniture")
       .then(res => res.json())
       .then(data => setProductos(data.products));
+
+      
+
   }, []);
 
   return (
