@@ -6,11 +6,12 @@ function Productos() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products/category/furniture")
-      .then(res => res.json())
-      .then(data => setProductos(data.products));
+    //fetch("https://dummyjson.com/products/category/furniture")
+     // .then(res => res.json())
+     // .then(data => setProductos(data.products));
 
-      
+      getProducts()
+        .then(products => setProductos(products))
 
   }, []);
 
@@ -35,7 +36,7 @@ function Productos() {
             }}
           >
             <img
-              src={prod.thumbnail}
+              src={prod.url}
               alt={prod.title}
               style={{
                 width: "100%",
@@ -44,7 +45,7 @@ function Productos() {
               }}
             />
 
-            <h4>{prod.title}</h4>
+            <h4>{prod.name}</h4>
             <p>${prod.price}</p>
 
             <Link to={`/producto/${prod.id}`}>

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
-
-
+import { getProductById } from "../Firebase/db";
 
 function ProductoDetalle() {
   const [producto, setProducto] = useState(null);
@@ -13,11 +12,18 @@ function ProductoDetalle() {
   const { id } = useParams();
   
 
+  //useEffect(() => {
+   // fetch(`https://dummyjson.com/products/${id}`)
+      // .then(res => res.json())
+     // .then(data => setProducto(data));
+  //}, [id]);
+
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then(res => res.json())
-      .then(data => setProducto(data));
-  }, [id]);
+  getProductById(id)
+    .then(prod => setProducto(prod))
+    .catch(err => console.error(err));
+}, [id]);
+
 
 //Funciones del contador
 const aumentar = () => {
@@ -33,13 +39,9 @@ const disminuir = () => {
 };
 
 
-
-
   if (!producto) {
     return <p style={{ padding: "40px" }}>Cargando producto...</p>;
   }
-
-
 
 
 
@@ -51,15 +53,15 @@ const disminuir = () => {
       {/* Imagen */}
       <div style={styles.imageBox}>
         <img
-          src={producto.thumbnail}
-          alt={producto.title}
+          src={producto.url}
+          alt={producto.name}
           style={styles.image}
         />
       </div>
 
       {/* Info */}
       <div style={styles.info}>
-        <h2 style={styles.title}>{producto.title}</h2>
+        <h2 style={styles.title}>{producto.name}</h2>
         <p style={styles.description}>{producto.description}</p>
 
         <p style={styles.category}>
@@ -86,14 +88,13 @@ const disminuir = () => {
 
   <button
   style={styles.btnPrimary}
-  onClick={() => agregarAlCarrito(cantidad)}
+ /* onClick={() => agregarAlCarrito(cantidad)} */
+ onClick={() => agregarAlCarrito({ ...producto, cantidad })}
 >
   Agregar al carrito
 </button>
 
-
 </div>
-
 
       </div>
     </div>
@@ -101,7 +102,6 @@ const disminuir = () => {
 }
 
 export default ProductoDetalle;
-
 
 const styles = {
   container: {
@@ -174,3 +174,5 @@ const styles = {
     textAlign: "center"
   }
 };
+
+
