@@ -3,6 +3,7 @@ import Productos from "./Components/Productos";
 import ProductoDetalle from "./Components/ProductoDetalle";
 import Contacto from "./Components/Contacto";
 import Inicio from "./Components/Inicio";
+import Carrito from "./Components/Carrito";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Inicio />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/producto/:id" element={<ProductoDetalle />} />
+        <Route path="/carrito" element={<Carrito />} />
         <Route path="/contacto" element={<Contacto />} />
       </Routes>
     </>

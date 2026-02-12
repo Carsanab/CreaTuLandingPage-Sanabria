@@ -40,10 +40,9 @@ const disminuir = () => {
 
 
   if (!producto) {
+    console.log(producto);
     return <p style={{ padding: "40px" }}>Cargando producto...</p>;
   }
-
-
 
 
 
@@ -86,13 +85,16 @@ const disminuir = () => {
     +
   </button>
 
+
+  
   <button
   style={styles.btnPrimary}
  /* onClick={() => agregarAlCarrito(cantidad)} */
  onClick={() => agregarAlCarrito({ ...producto, cantidad })}
 >
   Agregar al carrito
-</button>
+
+</button> 
 
 </div>
 
